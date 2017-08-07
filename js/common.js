@@ -216,10 +216,13 @@
     };
 
     // api request
-    this.request = function(url, query, method, data) {
+    this.request = function(url, query, method, data, background) {
       method = method || 'GET';
       method = method.toUpperCase();
-      self.showLoading(true);
+      if(!background) {
+        self.showLoading(true);
+      }
+
       var p = {};
 
       // stupid IE workaround, uncomment if implemented
@@ -248,7 +251,9 @@
           });
         },
         complete: function() {
-          self.showLoading(false);
+          if(!background) {
+            self.showLoading(false);
+          }
         }
       };
 
@@ -269,5 +274,5 @@
   };
 
   // wake up server
-  StoryPoints.request('/', null, 'HEAD');
+  StoryPoints.request('/', null, 'HEAD', null, true);
 })();
