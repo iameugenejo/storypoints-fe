@@ -60,7 +60,7 @@ $(function() {
     if(!title) return bootbox.alert('Title is required') && $title.focus();
 
     if(session_id) {
-      StoryPoints.request('/api/sessions/' + session_id, null, 'PUT', {
+      StoryPoints.request('/sessions/' + session_id, null, 'PUT', {
         name: title
       }).call = function(err, data) {
         if(err) return StoryPoints.handleError(err);
@@ -68,7 +68,7 @@ $(function() {
         handleHash();
       };
     } else {
-      StoryPoints.request('/api/sessions', null, 'POST', {
+      StoryPoints.request('/sessions', null, 'POST', {
         name: title
       }).call = function(err, data) {
         if(err) return StoryPoints.handleError(err);
@@ -88,7 +88,7 @@ $(function() {
 
     var user = $(this).data('user');
 
-    StoryPoints.request('/api/sessions/' + session_id + '/users', {user: user}, 'DELETE').call = function(err, data) {
+    StoryPoints.request('/sessions/' + session_id + '/users', {user: user}, 'DELETE').call = function(err, data) {
       if(err) return StoryPoints.handleError(err);
 
       handleHash();
@@ -101,7 +101,7 @@ $(function() {
     
     if(!session_id) return;
 
-    StoryPoints.request('/api/sessions/' + session_id + '/points', null, 'DELETE').call = function(err, data) {
+    StoryPoints.request('/sessions/' + session_id + '/points', null, 'DELETE').call = function(err, data) {
       if(err) return StoryPoints.handleError(err);
 
       handleHash();
@@ -112,7 +112,7 @@ $(function() {
   var $btn_delete = $('.btn-delete').on('click', function(e) {
     if(!session_id) return;
 
-    StoryPoints.request('/api/sessions/' + session_id, null, 'DELETE').call = function(err, data) {
+    StoryPoints.request('/sessions/' + session_id, null, 'DELETE').call = function(err, data) {
       if(err) return StoryPoints.handleError(err);
       
       Cookies.remove('session' + session_id);
@@ -172,7 +172,7 @@ $(function() {
   // render
   function render() {
     if(session_id) {
-      StoryPoints.request('/api/sessions/' + session_id, null, 'GET').call = function(err, data) {
+      StoryPoints.request('/sessions/' + session_id, null, 'GET').call = function(err, data) {
         if(err) return StoryPoints.handleError(err);
         if(!data) {
           $session.val('');
