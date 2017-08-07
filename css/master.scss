@@ -1,0 +1,21 @@
+---
+---
+body {
+  background-color: orange;
+}
+.panel:first-child {
+  margin-top: 20px;
+}
+td.user-points {
+  padding-left: 20px!important;
+}
+tr.text-danger {
+  color: #aaa;
+}
+.avg {
+  font-size: 30px;
+  color: #337ab7;
+}
+#session-id {
+  text-transform: uppercase;
+}

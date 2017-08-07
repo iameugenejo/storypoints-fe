@@ -1,0 +1,10 @@
+---
+---
+.form-control[readonly] {
+  border: none;
+  background-color: #FFF;
+  box-shadow: none;
+}
+.input-group .form-control[readonly] {
+  border: 1px solid #ccc;
+}

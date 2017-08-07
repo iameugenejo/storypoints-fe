@@ -1,0 +1,7 @@
+title: Story Points
+api_base: https://storypoints.martianloft.com
+socket_base: wss://storypoints.martianloft.com
+host: ""
+root: ""
+include:
+  - .gitignore

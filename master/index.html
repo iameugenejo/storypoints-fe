@@ -1,0 +1,71 @@
+---
+id: master
+title: Story Points for Masters
+layout: default
+styles:
+  - src: /css/font-awesome.min.css
+  - src: /css/master.css
+scripts:
+  - src: /js/master.js
+---
+
+<div class="container-fluid">
+  <div class="panel panel-warning">
+    <div class="panel-heading detail">
+      <div class="form-group">
+        <label for="session-id">Session</label>
+        <input type="text" id="session-id" class="session-id form-control" placeholder="session"></input>
+      </div>
+      <div class="form-group">
+        <label for="session_id">Member Link</label>
+        <a id="member-link"></a>
+      </div>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" class="title form-control" placeholder="Title"></input>
+      </div>
+
+      <button class="btn btn-success btn-save">Save</button>
+      <button class="btn btn-default btn-simple">Hide</button>
+      <button class="btn btn-danger btn-delete pull-right">Delete</button>
+    </div>
+    <div class="panel-heading simple">
+      <div class="input-group">
+        <input type="text" id="session-title" class="form-control" placeholder="Session" readonly="readonly"></input>
+        <span class="input-group-btn">
+          <button class="btn btn-default btn-detail">Detail</button>
+        </span>
+      </div>
+    </div>
+    <div class="panel-body">
+      <table class="point-table table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Points</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody class="users">
+        </tbody>
+        <tfoot style="display:none">
+          <tr class="text-primary">
+            <th>AVG</th>
+            <th><input type="number" class="avg form-control" readonly="readonly"></input></th>
+            <th><a href="#" class="btn-reset pull-right"><i class="glyphicon glyphicon-trash text-danger" /></a></th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% raw %}
+<script id="user-template" type="text/x-handlebars-template">
+  <tr{{#when points '==' '0'}} class="text-danger"{{/when}}{{#when points '>' '0'}} class="text-success"{{/when}}>
+    <td>{{ name }}</td>
+    <td class="user-points">{{#when points '==' '0'}}<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>{{/when}}{{#when points '>' '0'}}{{ points }}{{/when}}</td>
+    <td><a href="#" class="btn-remove-user pull-right" data-user="{{ _id }}"><i class="glyphicon glyphicon-trash text-danger" /></a></td>
+  </tr>
+</script>
+{% endraw %}

@@ -1,0 +1,28 @@
+---
+---
+body {
+  background-color: green;
+}
+.panel:first-child {
+  margin-top: 20px;
+}
+.btn-points {
+  margin: 1em auto;
+  display: block;
+  width: 70vw;
+  height: 3em;
+  font-size: 3em;
+  border-radius: 0.5em;
+  &.selected {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    &.zero-point {
+      background-color: #aaa;
+      border-color: #bbb;
+    }
+  }
+}
+#session-id {
+  text-transform: uppercase;
+}

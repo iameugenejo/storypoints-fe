@@ -1,0 +1,21 @@
+---
+---
+#top, #bottom {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 50%;
+  line-height: 50vh;
+  font-size: 5em;
+  color: #fff;
+}
+
+#top {
+    top: 0;
+    background-color: green;
+}
+
+#bottom {
+    bottom: 0;
+    background-color: orange;
+}
