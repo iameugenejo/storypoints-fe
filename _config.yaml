@@ -1,6 +1,6 @@
 title: Story Points
-api_base: https://storypoints.martianloft.com
-socket_base: wss://storypoints.martianloft.com
+api_base: https://api.storypoints.martianloft.com
+socket_base: wss://api.storypoints.martianloft.com
 host: ""
 root: ""
 include:
