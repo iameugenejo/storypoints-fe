@@ -267,4 +267,7 @@
     };
 
   };
+
+  // wake up server
+  StoryPoints.request('/', null, 'HEAD');
 })();

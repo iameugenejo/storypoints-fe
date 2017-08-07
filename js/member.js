@@ -56,7 +56,7 @@ $(function() {
     if(!name) return bootbox.alert('Name is required') && $name.focus();
     var future = {};
 
-    StoryPoints.request('/api/sessions/' + session_id + '/points', {name: name, points: points}, 'POST').call = function(err, data) {
+    StoryPoints.request('/sessions/' + session_id + '/points', {name: name, points: points}, 'POST').call = function(err, data) {
       if(err) {
         StoryPoints.handleError(err);
       } else {
@@ -83,7 +83,7 @@ $(function() {
       points = Cookies.get('points' + session_id, { expires: 30 });
       $name.val(StoryPoints.user.name);
 
-      StoryPoints.request('/api/sessions/' + session_id, null, 'GET').call = function(err, data) {
+      StoryPoints.request('/sessions/' + session_id, null, 'GET').call = function(err, data) {
         if(err) StoryPoints.handleError(err);
         
         handleResult(data);
