@@ -175,8 +175,9 @@ $(function() {
       StoryPoints.request('/sessions/' + session_id, null, 'GET').call = function(err, data) {
         if(err) return StoryPoints.handleError(err);
         if(!data) {
-          $session.val('');
-          return StoryPoints.handleError('Session ' + session_id + ' is not found');
+          StoryPoints.handleError('Session ' + session_id + ' is not found');
+          window.location.hash = '';
+          return;
         }
 
         last_updated_at = Date.now();
