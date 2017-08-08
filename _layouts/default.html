@@ -5,13 +5,13 @@ layout: base
 
 {{ content }}
 
-  <script src="{{ site.root }}/js/jquery.min.js"></script>
-  <script src="{{ site.root }}/js/handlebars.min.js"></script>
-  <script src="{{ site.root }}/js/moment.min.js"></script>
-  <script src="{{ site.root }}/js/handlebars.helpers.js"></script>
-  <script src="{{ site.root }}/js/bootstrap.min.js"></script>
-  <script src="{{ site.root }}/js/bootbox.min.js"></script>
-  <script src="{{ site.root }}/js/js-cookie.js"></script>
-  <script src="{{ site.root }}/js/uuid.min.js"></script>
-  <script src="{{ site.root }}/js/config.js"></script>
-  <script src="{{ site.root }}/js/common.js"></script>
+  <script src="{{ site.root }}/js/jquery.min.js?_={{ site.time | date: '%s' }}"></script>
+  <script src="{{ site.root }}/js/handlebars.min.js?_={{ site.time | date: '%s' }}"></script>
+  <script src="{{ site.root }}/js/moment.min.js?_={{ site.time | date: '%s' }}"></script>
+  <script src="{{ site.root }}/js/handlebars.helpers.js?_={{ site.time | date: '%s' }}"></script>
+  <script src="{{ site.root }}/js/bootstrap.min.js?_={{ site.time | date: '%s' }}"></script>
+  <script src="{{ site.root }}/js/bootbox.min.js?_={{ site.time | date: '%s' }}"></script>
+  <script src="{{ site.root }}/js/js-cookie.js?_={{ site.time | date: '%s' }}"></script>
+  <script src="{{ site.root }}/js/uuid.min.js?_={{ site.time | date: '%s' }}"></script>
+  <script src="{{ site.root }}/js/config.js?_={{ site.time | date: '%s' }}"></script>
+  <script src="{{ site.root }}/js/common.js?_={{ site.time | date: '%s' }}"></script>
