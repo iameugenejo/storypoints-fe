@@ -84,9 +84,10 @@ $(function() {
       $name.val(StoryPoints.user.name);
 
       StoryPoints.request('/sessions/' + session_id, null, 'GET').call = function(err, data) {
-        if(err) StoryPoints.handleError(err);
+        if(err) return StoryPoints.handleError(err);
         
         handleResult(data);
+        StoryPoints.connectSocket(session_id, render);
       };
     } else {
       $session.val('');

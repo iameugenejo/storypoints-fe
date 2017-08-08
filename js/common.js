@@ -212,7 +212,7 @@
 
     // handle error
     this.handleError = function(err) {
-      return bootbox.alert(err.message || err.error || JSON.stringify(err));
+      return bootbox.hideAll() && bootbox.alert(err.message || err.error || JSON.stringify(err));
     };
 
     // api request
@@ -270,6 +270,61 @@
 
       return p;
     };
+
+    // socket
+    var ws = null;
+    var last_updated_at = 0;
+
+    this.connectSocket = function(session_id, cb) {
+      if(!ws) {
+        ws = new WebSocket(__config.socket_base);
+        ws.onmessage = function (event) {
+          var message = JSON.parse(event.data);
+          if(message.session == session_id) {
+            if(last_updated_at < message.updated_at) {
+              console.log('session updated at ' + new Date());
+              cb();
+            }
+          } else {
+            try { ws.close(); } catch(e) {} finally {ws=null;}
+          }
+        };
+        ws.onopen = function() {
+          checkin(session_id, cb);
+        };
+        ws.onclose = function() {
+          ws = null;
+          console.log('session disconnected, retrying ... ');
+          setTimeout(function() {
+            cb();
+          }, 3000);
+        };
+      }
+    }
+
+    function checkin(session_id, cb) {
+      if(ws) {
+        if(ws.readyState === ws.OPEN) {
+          try {
+            ws.send(JSON.stringify({
+              session: session_id,
+              token: StoryPoints.user._id
+            }));
+          } catch(e) {
+            console.error(e);
+            setTimeout(function() {
+              checkin(session_id);
+            }, 3000);
+          }
+        } else {
+          setTimeout(function() {
+            checkin(session_id);
+          }, 3000);
+        }
+      } else {
+        connectSocket(session_id, cb);
+      }
+    }
 
   };
 

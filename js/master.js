@@ -13,8 +13,6 @@ $(function() {
   var user_template = Handlebars.compile($('#user-template').html());
   var session_id = $session.val().trim().toUpperCase();
   var is_admin = true;
-  var ws = null;
-  var last_updated_at = 0;
   
   // header toggle
   $('.btn-detail').on('click', function() {
@@ -121,54 +119,6 @@ $(function() {
     };
   });
 
-  // socket
-  function connectSocket() {
-    if(!ws) {
-      ws = new WebSocket(__config.socket_base);
-      ws.onmessage = function (event) {
-        var message = JSON.parse(event.data);
-        if(message.session == session_id) {
-          if(last_updated_at < message.updated_at) {
-            console.log('session updated at ' + new Date());
-            render();
-          }
-        } else {
-          try { ws.close(); } catch(e) {} finally {ws=null;}
-        }
-      };
-      ws.onopen = function() {
-        checkin();
-      };
-      ws.onclose = function() {
-        ws = null;
-        console.log('session disconnected, retrying ... ');
-        setTimeout(function() {
-          render();
-        }, 3000);
-      };
-    }
-  }
-
-  function checkin() {
-    if(ws) {
-      if(ws.readyState === ws.OPEN) {
-        try {
-          ws.send(JSON.stringify({
-            session: session_id,
-            token: StoryPoints.user._id
-          }));
-        } catch(e) {
-          console.error(e);
-          setTimeout(checkin, 3000);
-        }
-      } else {
-        setTimeout(checkin, 3000);
-      }
-    } else {
-      connectSocket();
-    }
-  }
-
   // render
   function render() {
     if(session_id) {
@@ -204,9 +154,7 @@ $(function() {
         $summary.toggle(!!data.users.length);
         $avg.val(Math.round(total / count));
 
-        if(is_admin) {
-          connectSocket();
-        }
+        StoryPoints.connectSocket(session_id, render);
       };
     } else {
       $member_link.attr('href', '#').text();
