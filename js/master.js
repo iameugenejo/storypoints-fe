@@ -5,6 +5,7 @@ $(function() {
   var $session = $('#session-id');
   var $users = $('.users');
   var $summary = $('.point-table tfoot');
+  var $summary_spinner = $summary.find('.icon');
   var $avg = $('.avg');
   var $buttons = $('.btn');
   var $header_detail = $('.panel-heading.detail');
@@ -142,17 +143,42 @@ $(function() {
 
         // populate users
         $users.empty();
-        var total = 0;
-        var count = 0;
-        data.users.forEach(function(u) {
-          $users.append(user_template(u));
-          if(u.points) {
-            total += u.points;
-            count++;
+
+        var has_pending = false;
+        for(var i in data.users) {
+          if(data.users[i].points == 0) {
+            has_pending = true;
+            break;
           }
+        }
+
+        var total = has_pending;
+        var count = 0;
+
+        data.users.forEach(function(u) {
+          if(has_pending) {
+            if(u.points > 0) {
+              u.points = -1;
+            }
+          } else {
+            if(u.points) {
+              total += u.points;
+              count++;
+            }
+          }
+
+          $users.append(user_template(u));
         });
+
         $summary.toggle(!!data.users.length);
-        $avg.val(Math.round(total / count));
+
+        if(count) {
+          $avg.val(Math.round(total / count));
+        } else {
+          $avg.val('');
+        }
+        $avg.toggle(!has_pending);
+        $summary_spinner.toggle(has_pending);
 
         StoryPoints.connectSocket(session_id, render);
       };

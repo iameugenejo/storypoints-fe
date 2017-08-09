@@ -38,7 +38,7 @@ scripts:
       </div>
     </div>
     <div class="panel-body">
-      <table class="point-table table table-striped">
+      <table class="point-table table table-striped table-fixed">
         <thead>
           <tr>
             <th>Name</th>
@@ -51,7 +51,10 @@ scripts:
         <tfoot style="display:none">
           <tr class="text-primary">
             <th>AVG</th>
-            <th><input type="number" class="avg form-control" readonly="readonly"></input></th>
+            <th>
+              <i class="fa fa-spinner fa-spin icon"></i>
+              <input type="number" class="avg form-control" readonly="readonly"></input>
+            </th>
             <th><a href="#" class="btn-reset pull-right"><i class="glyphicon glyphicon-trash text-danger" /></a></th>
           </tr>
         </tfoot>
@@ -64,7 +67,7 @@ scripts:
 <script id="user-template" type="text/x-handlebars-template">
   <tr{{#when points '==' '0'}} class="text-danger"{{/when}}{{#when points '>' '0'}} class="text-success"{{/when}}>
     <td>{{ name }}</td>
-    <td class="user-points">{{#when points '==' '0'}}<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>{{/when}}{{#when points '>' '0'}}{{ points }}{{/when}}</td>
+    <td class="user-points">{{#when points '==' '-1'}}<i class="fa fa-check-circle icon text-success"></i>{{/when}}{{#when points '==' '0'}}<i class="fa fa-spinner fa-spin icon"></i>{{/when}}{{#when points '>' '0'}}{{ points }}{{/when}}</td>
     <td><a href="#" class="btn-remove-user pull-right" data-user="{{ _id }}"><i class="glyphicon glyphicon-trash text-danger" /></a></td>
   </tr>
 </script>

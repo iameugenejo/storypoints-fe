@@ -6,16 +6,27 @@ body {
 .panel:first-child {
   margin-top: 20px;
 }
-td.user-points {
-  padding-left: 20px!important;
-}
-tr.text-danger {
-  color: #aaa;
-}
 .avg {
   font-size: 30px;
   color: #337ab7;
 }
 #session-id {
   text-transform: uppercase;
+}
+.icon {
+  font-size: 24px
+}
+.point-table {
+  td.user-points {
+    padding-left: 20px!important;
+    .icon.text-success {
+      margin-left: 2px;
+    }
+  }
+  tr.text-danger {
+    color: #aaa;
+  }
+  tfoot .icon {
+    margin-left: 12px;
+  }
 }
