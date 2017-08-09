@@ -275,31 +275,43 @@
     var ws = null;
     var last_updated_at = 0;
 
-    this.connectSocket = function(session_id, cb) {
-      if(!ws) {
-        ws = new WebSocket(__config.socket_base);
-        ws.onmessage = function (event) {
-          var message = JSON.parse(event.data);
-          if(message.session == session_id) {
-            if(last_updated_at < message.updated_at) {
-              console.log('session updated at ' + new Date());
-              cb();
-            }
-          } else {
-            try { ws.close(); } catch(e) {} finally {ws=null;}
-          }
-        };
-        ws.onopen = function() {
-          checkin(session_id, cb);
-        };
-        ws.onclose = function() {
-          ws = null;
-          console.log('session disconnected, retrying ... ');
-          setTimeout(function() {
-            cb();
-          }, 3000);
-        };
+    this.disconnectSocket = function() {
+      if(ws) {
+        try { ws.close(); } catch(e) {} finally {ws=null;}
       }
+    };
+
+    this.connectSocket = function(session_id, cb) {
+      if(ws) {
+        if(ws.session_id !== session_id) {
+          self.disconnectSocket();
+        }
+      }
+
+      ws = new WebSocket(__config.socket_base);
+      ws.session_id = session_id;
+      ws.onmessage = function (event) {
+        var message = JSON.parse(event.data);
+        if(message.session == session_id) {
+          if(last_updated_at < message.updated_at) {
+            console.log('session updated at ' + new Date());
+            cb();
+          }
+        } else {
+          self.disconnectSocket();
+        }
+      };
+      ws.onopen = function() {
+        checkin(session_id, cb);
+      };
+      ws.onclose = function() {
+        ws = null;
+        console.log('session disconnected, retrying ... ');
+        setTimeout(function() {
+          cb();
+        }, 3000);
+      };
+    
     }
 
     function checkin(session_id, cb) {
@@ -322,7 +334,7 @@
           }, 3000);
         }
       } else {
-        connectSocket(session_id, cb);
+        self.connectSocket(session_id, cb);
       }
     }
 

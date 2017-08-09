@@ -3,6 +3,7 @@ $(function() {
   var $session = $('#session-id');
   var $name = $('#name').val(StoryPoints.user.name);
   var $buttons = $('.btn');
+  var visited = false;
   
   var session_id = null;
   var user = null;
@@ -41,6 +42,11 @@ $(function() {
         $buttons.filter('[data-points="' + user.points + '"]').addClass('selected');
       } else {
         user = {};
+        if(!visited && StoryPoints.user.name) {
+          Cookies.set('visited' + session_id, '1');
+          // submit 0
+          submitPoints(0);
+        }
       }
       $title.show();
       $buttons.show();
@@ -80,7 +86,7 @@ $(function() {
   function render() {
     if(session_id) {
       $session.val(session_id);
-      points = Cookies.get('points' + session_id, { expires: 30 });
+      visited = Cookies.get('visited' + session_id);
       $name.val(StoryPoints.user.name);
 
       StoryPoints.request('/sessions/' + session_id, null, 'GET').call = function(err, data) {

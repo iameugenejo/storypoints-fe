@@ -110,7 +110,8 @@ $(function() {
   // delete button
   var $btn_delete = $('.btn-delete').on('click', function(e) {
     if(!session_id) return;
-
+    
+    StoryPoints.disconnectSocket();
     StoryPoints.request('/sessions/' + session_id, null, 'DELETE').call = function(err, data) {
       if(err) return StoryPoints.handleError(err);
       
@@ -183,7 +184,7 @@ $(function() {
         StoryPoints.connectSocket(session_id, render);
       };
     } else {
-      $member_link.attr('href', '#').text();
+      $member_link.attr('href', '#').text('');
       $session.val('');
       $title.val('').prop('readonly', false);
       $session_title.val('');
