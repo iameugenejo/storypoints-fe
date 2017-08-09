@@ -3,6 +3,7 @@ id: home
 title: Story Points for Members
 layout: default
 styles:
+  - src: /css/font-awesome.min.css
   - src: /css/member.css
 scripts:
   - src: /js/member.js
@@ -24,14 +25,16 @@ scripts:
     <div class="panel-body">
 
       <label id="title">Title</label>
-      <button class="btn btn-default btn-points zero-point selected" data-points="0">Undecided</button>
-      <button class="btn btn-default btn-points" data-points="1">1</button>
-      <button class="btn btn-default btn-points" data-points="2">2</button>
-      <button class="btn btn-default btn-points" data-points="3">3</button>
-      <button class="btn btn-default btn-points" data-points="5">5</button>
-      <button class="btn btn-default btn-points" data-points="8">8</button>
-      <button class="btn btn-default btn-points" data-points="13">13</button>
-      <button class="btn btn-default btn-points" data-points="21">21</button>
+      <div class="button-grid">
+        <button class="btn btn-default btn-points zero-point selected" data-points="0"><i class="fa fa-ban"></i></button>
+        <button class="btn btn-default btn-points" data-points="1">1</button>
+        <button class="btn btn-default btn-points" data-points="2">2</button>
+        <button class="btn btn-default btn-points" data-points="3">3</button>
+        <button class="btn btn-default btn-points" data-points="5">5</button>
+        <button class="btn btn-default btn-points" data-points="8">8</button>
+        <button class="btn btn-default btn-points" data-points="13">13</button>
+        <button class="btn btn-default btn-points" data-points="21">21</button>
+      </div>
     </div>
   </div>
 </div>
