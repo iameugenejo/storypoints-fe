@@ -295,7 +295,7 @@
         if(message.session == session_id) {
           if(last_updated_at < message.updated_at) {
             console.log('session updated at ' + new Date());
-            cb();
+            cb && cb();
           }
         } else {
           self.disconnectSocket();
@@ -308,7 +308,7 @@
         ws = null;
         console.log('session disconnected, retrying ... ');
         setTimeout(function() {
-          cb();
+          cb && cb();
         }, 3000);
       };
     
