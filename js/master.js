@@ -115,8 +115,6 @@ $(function() {
     StoryPoints.request('/sessions/' + session_id, null, 'DELETE').call = function(err, data) {
       if(err) return StoryPoints.handleError(err);
       
-      Cookies.remove('session' + session_id);
-
       window.location.hash = '#';
     };
   });

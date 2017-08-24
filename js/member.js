@@ -37,8 +37,6 @@ $(function() {
       $title.text(data.name);
 
       if(user) {
-        Cookies.set('points' + session_id, user.points);
-
         $buttons.filter('[data-points="' + user.points + '"]').addClass('selected');
       } else {
         user = {};
