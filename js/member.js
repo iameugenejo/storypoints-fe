@@ -91,7 +91,7 @@ $(function() {
         if(err) return StoryPoints.handleError(err);
         
         handleResult(data);
-        // StoryPoints.connectSocket(session_id, render);
+        StoryPoints.connectSocket(session_id, render);
       };
     } else {
       $session.val('');

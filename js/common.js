@@ -283,9 +283,9 @@
 
     this.connectSocket = function(session_id, cb) {
       if(ws) {
-        if(ws.session_id !== session_id) {
-          self.disconnectSocket();
-        }
+        if(ws.session_id == session_id) return;
+
+        self.disconnectSocket();
       }
 
       ws = new WebSocket(__config.socket_base);
