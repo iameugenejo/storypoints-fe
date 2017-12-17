@@ -37,7 +37,11 @@ $(function() {
       $title.text(data.name);
 
       if(user) {
-        $buttons.filter('[data-points="' + user.points + '"]').addClass('selected');
+        if(user.ready) {
+          $buttons.filter('[data-points="' + user.points + '"]').addClass('selected');
+        } else {
+          $buttons.filter('[data-points="idk"]').addClass('selected');
+        }
       } else {
         user = {};
         if(!visited && StoryPoints.user.name) {

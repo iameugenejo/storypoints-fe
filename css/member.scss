@@ -19,6 +19,9 @@ body {
     &.zero-point {
       background-color: #aaa;
       border-color: #bbb;
+      &[data-points="idk"] {
+        background-color: orange;
+      }
     }
   }
 }

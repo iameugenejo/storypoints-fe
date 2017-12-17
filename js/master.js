@@ -5,7 +5,8 @@ $(function() {
   var $session = $('#session-id');
   var $users = $('.users');
   var $summary = $('.point-table tfoot');
-  var $summary_spinner = $summary.find('.icon');
+  var $summary_spinner = $summary.find('.spinner');
+  var $no_result = $summary.find('.no-result');
   var $avg = $('.avg');
   var $buttons = $('.btn');
   var $header_detail = $('.panel-heading.detail');
@@ -145,7 +146,8 @@ $(function() {
 
         var has_pending = false;
         for(var i in data.users) {
-          if(data.users[i].points == 0) {
+          var user = data.users[i];
+          if(user.ready && user.points == 0) {
             has_pending = true;
             break;
           }
@@ -170,6 +172,7 @@ $(function() {
         });
 
         $summary.toggle(!!data.users.length);
+        $no_result.toggle(!count && !has_pending);
 
         if(count) {
           $avg.val(Math.round(total / count));

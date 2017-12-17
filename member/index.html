@@ -7,6 +7,8 @@ styles:
   - src: /css/member.css
 scripts:
   - src: /js/member.js
+points: [1,2,3,5,8,13,21,34,55,89,144]
+
 ---
 
 <div class="container-fluid">
@@ -26,18 +28,11 @@ scripts:
 
       <label id="title">Title</label>
       <div class="button-grid">
-        <button class="btn btn-default btn-points zero-point selected" data-points="0"><i class="fa fa-ban"></i></button>
-        <button class="btn btn-default btn-points" data-points="1">1</button>
-        <button class="btn btn-default btn-points" data-points="2">2</button>
-        <button class="btn btn-default btn-points" data-points="3">3</button>
-        <button class="btn btn-default btn-points" data-points="5">5</button>
-        <button class="btn btn-default btn-points" data-points="8">8</button>
-        <button class="btn btn-default btn-points" data-points="13">13</button>
-        <button class="btn btn-default btn-points" data-points="21">21</button>
-        <button class="btn btn-default btn-points" data-points="34">34</button>
-        <button class="btn btn-default btn-points" data-points="55">55</button>
-        <button class="btn btn-default btn-points" data-points="89">89</button>
-        <button class="btn btn-default btn-points" data-points="144">144</button>
+        <button class="btn btn-default btn-points zero-point selected" data-points="0"><i class="fa fa-ban"></i></i></button>
+        <button class="btn btn-default btn-points zero-point" data-points="idk"><i class="fa fa-meh-o"></i></button>
+        {% for n in page.points %}
+        <button class="btn btn-default btn-points" data-points="{{ n }}">{{ n }}</button>
+        {% endfor %}
       </div>
     </div>
   </div>

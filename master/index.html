@@ -52,7 +52,8 @@ scripts:
           <tr class="text-primary">
             <th>AVG</th>
             <th>
-              <i class="fa fa-spinner fa-spin icon"></i>
+              <i class="fa fa-spinner fa-spin icon spinner"></i>
+              <i class="fa fa-frown-o icon no-result text-danger"></i>
               <input type="number" class="avg form-control" readonly="readonly"></input>
             </th>
             <th><a href="#" class="btn-reset btn btn-danger pull-right">Reset <i class="glyphicon glyphicon-trash" style="color:white" /></a></th>
@@ -67,7 +68,7 @@ scripts:
 <script id="user-template" type="text/x-handlebars-template">
   <tr{{#when points '==' '0'}} class="text-danger"{{/when}}{{#when points '>' '0'}} class="text-success"{{/when}}>
     <td>{{ name }}</td>
-    <td class="user-points">{{#when points '==' '-1'}}<i class="fa fa-check-circle icon text-success"></i>{{/when}}{{#when points '==' '0'}}<i class="fa fa-spinner fa-spin icon"></i>{{/when}}{{#when points '>' '0'}}{{ points }}{{/when}}</td>
+    <td class="user-points">{{# if ready }}{{#when points '==' '-1'}}<i class="fa fa-check-circle icon text-success"></i>{{/when}}{{#when points '==' '0'}}<i class="fa fa-spinner fa-spin icon"></i>{{/when}}{{#when points '>' '0'}}{{ points }}{{/when}}{{ else }}<i class="fa fa-meh-o icon text-success"></i>{{/if}}</td>
     <td><a href="#" class="btn-remove-user pull-right" data-user="{{ _id }}"><i class="glyphicon glyphicon-trash text-danger" /></a></td>
   </tr>
 </script>
